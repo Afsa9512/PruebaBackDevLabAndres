@@ -32,8 +32,13 @@ namespace PruebaDobleV.API.Controllers
         public async Task<EntityCatProducto> GetProductoById(int idProducto)
         {
             var producto = await _actionBL_Producto.GetProductoByIdAsync(idProducto);
-
-            return producto.Data;
+            EntityCatProducto entity = new EntityCatProducto();
+            entity.Id = producto.Data.Id;
+            entity.NombreProducto = producto.Data.NombreProducto;
+            entity.ImagenProducto = producto.Data.ImagenProducto == null ? string.Empty : "data:image/png;base64," + Convert.ToBase64String(producto.Data.ImagenProducto);
+            entity.PrecioUnitario = producto.Data.PrecioUnitario;
+            entity.Ext = producto.Data.Ext;
+            return entity;
         }
 
         [HttpPost]
@@ -44,7 +49,19 @@ namespace PruebaDobleV.API.Controllers
             string rutaCompleta = $"{rutaRaiz}Imagenes\\{dto.ImagenProducto}";
 
             byte[] imagen = System.IO.File.ReadAllBytes(rutaCompleta);
-           
+
+            if (System.IO.File.Exists(rutaCompleta))
+            {
+                try
+                {
+                    // Eliminar el archivo
+                    System.IO.File.Delete(rutaCompleta);
+                }
+                catch (IOException e)
+                {
+                    Console.WriteLine("Ocurrió un error al intentar eliminar el archivo: " + e.Message);
+                }
+            }
 
             var result = _actionBL_Producto.CreateProductoAsync(dto, imagen);
 

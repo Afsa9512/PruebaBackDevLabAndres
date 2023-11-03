@@ -2,6 +2,7 @@
 using PruebaDobleV.DAL.DevLab;
 using PruebaDobleV.DAL.Interfaces;
 using PruebaDobleV.Entities.DevLabEntity;
+using PruebaDobleV.Entities.ViewModels;
 using PruebaDobleV.Utility;
 using System.Drawing;
 using static System.Net.Mime.MediaTypeNames;
@@ -33,18 +34,18 @@ namespace PruebaDobleV.BL.DevLab
             }
         }
 
-        public async Task<EntityResult<EntityCatProducto>> GetProductoByIdAsync(int idProducto)
+        public async Task<EntityResult<ProductoViewModel>> GetProductoByIdAsync(int idProducto)
         {
             try
             {
-                EntityCatProducto result = await productoDAL.GetProductoByIdAsync(idProducto);
+                ProductoViewModel result = await productoDAL.GetProductoByIdAsync(idProducto);
 
 
 
                 if (result != null)
-                    return EntityResult<EntityCatProducto>.SuccessResult(true, System.Net.HttpStatusCode.OK, result, string.Empty);
+                    return EntityResult<ProductoViewModel>.SuccessResult(true, System.Net.HttpStatusCode.OK, result, string.Empty);
                 else
-                    return EntityResult<EntityCatProducto>.WrongResult(System.Net.HttpStatusCode.NotFound, Utilidades.GetNotFoundListError());
+                    return EntityResult<ProductoViewModel>.WrongResult(System.Net.HttpStatusCode.NotFound, Utilidades.GetNotFoundListError());
             }
             catch (Exception ex)
             {

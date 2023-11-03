@@ -1,8 +1,10 @@
 ﻿using PruebaDobleV.DAL.Connection;
 using PruebaDobleV.DAL.Interfaces;
 using PruebaDobleV.Entities.DevLabEntity;
+using PruebaDobleV.Entities.ViewModels;
 using System.Data;
 using System.Data.SqlClient;
+using System.Text;
 
 namespace PruebaDobleV.DAL.DevLab
 {
@@ -40,11 +42,11 @@ namespace PruebaDobleV.DAL.DevLab
             }
         }
 
-        public async Task<EntityCatProducto> GetProductoByIdAsync(int idProducto)
+        public async Task<ProductoViewModel> GetProductoByIdAsync(int idProducto)
         {
             try
             {
-                EntityCatProducto producto = new EntityCatProducto();
+                ProductoViewModel producto = new ProductoViewModel();
                 AdminConection adminConection = new AdminConection();
                 string mensajeDeError = string.Empty;
 
@@ -56,11 +58,11 @@ namespace PruebaDobleV.DAL.DevLab
 
                 foreach (DataRow item in data.Rows)
                 {
-                    producto = new EntityCatProducto()
+                    producto = new ProductoViewModel()
                     {
                         Id = Convert.ToInt32(item["Id"]),
                         NombreProducto = item["NombreProducto"].ToString(),
-                        // ImagenProducto = item["ImagenProducto"].ToString(),
+                        ImagenProducto = item["ImagenProducto"] as byte[],
                         PrecioUnitario = Convert.ToDecimal(item["PrecioUnitario"]),
                         Ext = item["Ext"].ToString()
                     };
@@ -112,7 +114,7 @@ namespace PruebaDobleV.DAL.DevLab
                 SqlParameter[] parameters = {
                     new SqlParameter { ParameterName = "IdProducto", Value = entity.Id},
                     new SqlParameter {ParameterName = "NombreProducto", Value = entity.NombreProducto},
-                    //new SqlParameter {ParameterName = "ImagenProducto", Value = entity.ImagenProducto},
+                    new SqlParameter {ParameterName = "ImagenProducto", Value = entity.ImagenProducto},
                     new SqlParameter {ParameterName = "Preciounitario", Value = entity.PrecioUnitario},
                     new SqlParameter {ParameterName = "Ext", Value = entity.Ext},
                 };
