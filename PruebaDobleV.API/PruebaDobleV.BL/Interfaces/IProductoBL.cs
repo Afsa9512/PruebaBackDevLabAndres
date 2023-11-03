@@ -6,7 +6,7 @@ namespace PruebaDobleV.BL.Interfaces
     {
         public Task<EntityResult<List<EntityCatProducto>>> GetAllProductosAsync();
         public Task<EntityResult<EntityCatProducto>> GetProductoByIdAsync(int idProducto);
-        public string CreateProductoAsync(EntityCatProducto dto);
+        public string CreateProductoAsync(EntityCatProducto dto, byte[] imagen);
         public string UpdateProductoAsync(EntityCatProducto dto);
     }
 }

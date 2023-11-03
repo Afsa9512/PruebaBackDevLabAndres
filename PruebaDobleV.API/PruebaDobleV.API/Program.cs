@@ -1,3 +1,4 @@
+using Microsoft.Extensions.FileProviders;
 using PruebaDobleV.API.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -30,6 +31,13 @@ if (app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 
 app.UseCors("MyPolicy");
+
+app.UseStaticFiles();
+app.UseStaticFiles(new StaticFileOptions()
+{
+    FileProvider = new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(), @"Imagenes")),
+    RequestPath = new PathString("/Imagenes")
+});
 
 app.UseAuthorization();
 

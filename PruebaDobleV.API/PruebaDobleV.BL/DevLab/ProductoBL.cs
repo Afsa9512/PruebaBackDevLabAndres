@@ -52,11 +52,11 @@ namespace PruebaDobleV.BL.DevLab
             }
         }
 
-        public string CreateProductoAsync(EntityCatProducto dto)
+        public string CreateProductoAsync(EntityCatProducto dto, byte[] imagen)
         {
             try
             {
-                var result = productoDAL.CreateProductoAsync(dto);
+                var result = productoDAL.CreateProductoAsync(dto ,imagen);
 
                 return "Producto creado con exito.!";
             }

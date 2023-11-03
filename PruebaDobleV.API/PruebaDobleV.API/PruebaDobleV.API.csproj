@@ -15,4 +15,8 @@
     <ProjectReference Include="..\PruebaDobleV.BL\PruebaDobleV.BL.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Imagenes\" />
+  </ItemGroup>
+
 </Project>

@@ -24,7 +24,7 @@ namespace PruebaDobleV.DAL.DevLab
                     {
                         Id = Convert.ToInt32(item["Id"]),
                         NombreProducto = item["NombreProducto"].ToString(),
-                        ImagenProducto = item["ImagenProducto"].ToString(),
+                        //ImagenProducto = item["ImagenProducto"].ToString(),
                         PrecioUnitario = Convert.ToDecimal(item["PrecioUnitario"]),
                         Ext = item["Ext"].ToString(),
                     };
@@ -60,7 +60,7 @@ namespace PruebaDobleV.DAL.DevLab
                     {
                         Id = Convert.ToInt32(item["Id"]),
                         NombreProducto = item["NombreProducto"].ToString(),
-                        ImagenProducto = item["ImagenProducto"].ToString(),
+                        // ImagenProducto = item["ImagenProducto"].ToString(),
                         PrecioUnitario = Convert.ToDecimal(item["PrecioUnitario"]),
                         Ext = item["Ext"].ToString()
                     };
@@ -76,7 +76,7 @@ namespace PruebaDobleV.DAL.DevLab
         }
 
 
-        public Task CreateProductoAsync(EntityCatProducto entity)
+        public Task CreateProductoAsync(EntityCatProducto entity, byte[] imagen)
         {
             try
             {
@@ -86,7 +86,7 @@ namespace PruebaDobleV.DAL.DevLab
 
                 SqlParameter[] parameters = {
                     new SqlParameter {ParameterName = "NombreProducto", Value = entity.NombreProducto},
-                    new SqlParameter {ParameterName = "ImagenProducto", Value = entity.ImagenProducto},
+                    new SqlParameter {ParameterName = "ImagenProducto", Value = imagen},
                     new SqlParameter {ParameterName = "Preciounitario", Value = entity.PrecioUnitario},
                     new SqlParameter {ParameterName = "Ext", Value = entity.Ext},
                 };
@@ -112,7 +112,7 @@ namespace PruebaDobleV.DAL.DevLab
                 SqlParameter[] parameters = {
                     new SqlParameter { ParameterName = "IdProducto", Value = entity.Id},
                     new SqlParameter {ParameterName = "NombreProducto", Value = entity.NombreProducto},
-                    new SqlParameter {ParameterName = "ImagenProducto", Value = entity.ImagenProducto},
+                    //new SqlParameter {ParameterName = "ImagenProducto", Value = entity.ImagenProducto},
                     new SqlParameter {ParameterName = "Preciounitario", Value = entity.PrecioUnitario},
                     new SqlParameter {ParameterName = "Ext", Value = entity.Ext},
                 };
